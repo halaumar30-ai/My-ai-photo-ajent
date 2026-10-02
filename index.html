@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>My AI Photo Agent</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #666;
+      margin-bottom: 25px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-top: 18px;
+      margin-bottom: 8px;
+    }
+
+    input[type="file"],
+    textarea {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 16px;
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 20px;
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      background: #111;
+      color: white;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #333;
+    }
+
+    #preview {
+      width: 100%;
+      margin-top: 15px;
+      border-radius: 10px;
+      display: none;
+    }
+
+    .status {
+      margin-top: 20px;
+      padding: 12px;
+      background: #f1f1f1;
+      border-radius: 10px;
+      color: #555;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <h1>📸 My AI Photo Agent</h1>
+
+    <div class="subtitle">
+      Photo + Prompt → Master Prompt → AI Image
+    </div>
+
+    <label>Select Your Photo</label>
+
+    <input
+      type="file"
+      id="photo"
+      accept="image/*"
+    >
+
+    <img id="preview" alt="Photo Preview">
+
+    <label>Enter Your Prompt</label>
+
+    <textarea
+      id="userPrompt"
+      placeholder="Example: Meri photo ko cinematic mountain background mein bana do, face bilkul same rehna chahiye."
+    ></textarea>
+
+    <button onclick="startAgent()">
+      🚀 Generate My Photo
+    </button>
+
+    <div class="status" id="status">
+      Agent ready...
+    </div>
+
+  </div>
+
+  <script>
+
+    const photoInput = document.getElementById("photo");
+    const preview = document.getElementById("preview");
+
+    photoInput.addEventListener("change", function () {
+
+      const file = this.files[0];
+
+      if (file) {
+        preview.src = URL.createObjectURL(file);
+        preview.style.display = "block";
+      }
+
+    });
+
+    function startAgent() {
+
+      const photo = document.getElementById("photo").files[0];
+      const prompt = document.getElementById("userPrompt").value.trim();
+      const status = document.getElementById("status");
+
+      if (!photo) {
+        status.innerText = "❌ Please select a photo first.";
+        return;
+      }
+
+      if (!prompt) {
+        status.innerText = "❌ Please enter your prompt.";
+        return;
+      }
+
+      status.innerText =
+        "⏳ Agent will process your photo and prompt...";
+
+      /*
+        NEXT STEP:
+
+        1. Send photo + prompt to OpenAI.
+        2. OpenAI creates the Master Prompt.
+        3. Send Master Prompt + photo to Meta image API.
+        4. Receive the generated image.
+        5. Show the final image here.
+      */
+
+      setTimeout(function () {
+
+        status.innerText =
+          "✅ Photo received. AI connection will be added in the next step.";
+
+      }, 1000);
+
+    }
+
+  </script>
+
+</body>
+  </html>
